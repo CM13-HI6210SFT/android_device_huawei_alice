@@ -14,7 +14,11 @@
 # limitations under the License.
 #
 
-$(call inherit-product-if-exists, vendor/huawei/alice/alice-vendor.mk)
+# Inherit from those products. Most specific first.
+$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/product_launched_with_m.mk)
+$(call inherit-product, vendor/huawei/cherryplus/cherryplus-vendor.mk)
 
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += \
@@ -263,26 +267,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     textclassifier.smartselection.bundle1
 
-# NFC
-PRODUCT_PACKAGES += \
-    com.android.nfc_extras \
-    Tag \
-    NfcNci \
-    nfc_nci.pn54x.default
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/prebuilts/libnfc-brcm.conf:system/etc/libnfc-brcm.conf \
-    $(LOCAL_PATH)/prebuilts/libnfc-brcm-alice.conf:system/etc/libnfc-brcm-alice.conf \
-    $(LOCAL_PATH)/prebuilts/libnfc-nxp.conf:system/etc/libnfc-nxp.conf \
-    $(LOCAL_PATH)/prebuilts/libnfc-nxp-alice.conf:system/etc/libnfc-nxp-alice.conf \
-    $(LOCAL_PATH)/prebuilts/nfcee_access.xml:system/etc/nfcee_access.xml
-
-PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/com.android.nfc_extras.xml:system/etc/permissions/com.android.nfc_extras.xml \
-    frameworks/native/data/etc/android.hardware.nfc.hce.xml:system/etc/permissions/android.hardware.nfc.hce.xml \
-    frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml \
-    frameworks/native/data/etc/com.nxp.mifare.xml:system/etc/permissions/com.nxp.mifare.xml
-
 # Wifi
 PRODUCT_PACKAGES += \
     libwpa_client \
@@ -298,4 +282,20 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wifi/wpa_supplicant_hisi.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_hisi.conf \
     $(LOCAL_PATH)/wifi/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf
 
+# Boot animation
+TARGET_SCREEN_HEIGHT := 1280
+TARGET_SCREEN_WIDTH := 720
+TARGET_BOOT_ANIMATION_RES := 720
+
 $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
+$(call inherit-product, frameworks/native/build/phone-xxhdpi-2048-hwui-memory.mk)
+
+# Device identifier. This must come after all inclusions
+PRODUCT_DEVICE := cherryplus
+PRODUCT_BRAND := Honor
+PRODUCT_MANUFACTURER := HUAWEI
+PRODUCT_MODEL := Che2-L11
+
+PRODUCT_GMS_CLIENTID_BASE := android-huawei
+PRODUCT_BUILD_PROP_OVERRIDES += \
+    TARGET_DEVICE=hi6210sft

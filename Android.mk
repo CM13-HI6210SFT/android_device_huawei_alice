@@ -1,5 +1,6 @@
 #
 # Copyright (C) 2017 The LineageOS Project
+#           (C) 2017-2019 ksrt12 (Kazakov Stepan)
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,7 +16,7 @@
 
 LOCAL_PATH := $(call my-dir)
 
-ifeq ($(TARGET_DEVICE), alice)
+ifeq ($(TARGET_DEVICE), cherryplus)
 
 include $(call all-makefiles-under,$(LOCAL_PATH))
 
