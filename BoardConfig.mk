@@ -92,9 +92,6 @@ BOARD_SUPPORTS_DOZE_POWER_MODES := true
 # Extended Filesystem Support
 TARGET_EXFAT_DRIVER := exfat
 
-# Surfaceflinger
-NUM_FRAMEBUFFER_SURFACE_BUFFERS := 6
-
 # Kernel
 TARGET_GCC_VERSION_EXP := 4.9u
 BOARD_KERNEL_BASE := 0x07478000
@@ -106,7 +103,7 @@ BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x07b88000 -
 TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
 TARGET_KERNEL_HEADER_ARCH := arm64
-TARGET_KERNEL_SOURCE := ../honor/kernel/cherryplus
+TARGET_KERNEL_SOURCE := ../honor/kernel/hi6210sft-o
 TARGET_KERNEL_CONFIG := cherryplus_defconfig
 
 # Partitions
